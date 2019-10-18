@@ -18,31 +18,31 @@ import torchvision.datasets as datasets
 
 #File imports
 from data_load import *
-from config import config_train, directories
+from config import config_test, directories
 from model import *
 
 def inference(checkpoint_enc_path, data_loader, net, device='cpu'):
-    net.cuda(device)
+    # net.cuda(device)
     
-    saved_state_dict = torch.load(checkpoint_enc_path)
-    # for key,value in saved_state_dict.items():
-    #     print(key,value.size())
-    # print(saved_state_dict.items())
-    saved_dict = torch.load('index_pred1.pth')
+    saved_state_dict = torch.load(checkpoint_enc_path, map_location=device)
+    dev = str(device)
+ 
+    if dev=='cpu':
+        print("Evaluating in CPU")
+    else:
+        net.cuda(device)
+    
+    saved_dict = torch.load('index_pred1.pth', map_location=device)
     saved_dict = {'decoder.ind_pred.'+k: v for k, v in saved_dict.state_dict().items() if 'conv1' in k }
     saved_state_dict1 = {k: v for k, v in saved_state_dict.items() if 'decoder.ind_pred' not in k }
     saved_state_dict1.update(saved_dict)
     net.load_state_dict(saved_state_dict1)
     
-    #net.eval()
-    net.cuda(device)
-    #net.eval()
     global_count = 0
     for count,img in enumerate(data_loader):
-        # print(img[1])
-        # label = img[1]
-        label = 0
-        I_label = 1
+
+        label = 'Compressed'
+        I_label = 'Original'
         img = img.to(device)
         out = net(img,evaluate=True)
         print(out.size())
@@ -78,7 +78,7 @@ def main():
     # device_id = 
     # torch.cuda.set_device(device_id)
     #device = 'cpu'
-    print(torch.cuda.current_device())
+    # print(torch.cuda.currenst_device())
     print('Running on device : {}'.format(device))
 
     start = time.time()
@@ -89,21 +89,21 @@ def main():
     #                        transforms.Normalize((0.1307,), (0.3081,))
     #                    ])),
     #     batch_size=1, shuffle=True)
-    train_loader = torch.utils.data.DataLoader(
-        CLIC_Dataset(directories.root, directories.train, config_train.mirror, crop_size = (512,512)),
-        batch_size=2, shuffle=True, num_workers=config_train.workers, pin_memory=True,drop_last=True)
+    test_loader = torch.utils.data.DataLoader(
+        CLIC_Dataset(directories.root, directories.test, config_test.mirror, crop_size = (512,512)),
+        batch_size=2, shuffle=True, num_workers=config_test.workers, pin_memory=True,drop_last=True)
     end = time.time()
 
     print("Time to create the training dataloaders = " ,(end - start))
 
     # Build network
-    CompressNet = Model(config_train)
+    CompressNet = Model(config_test)
     # print(CompressNet)
     #CompressNet.load_state_dict(torch.load('./Checkpoints/Checkpoint_CompressNet_90.pth'))
     #CompressNet.eval()
     # inference('./Checkpoints/Checkpoint_CNet_CompressNet_withGD_noise_95.pth', train_loader, net = CompressNet,device=device)
     # Noise = False, Channel Bottleneck = 16, GAN, C = 8
-    inference('./PreCheckpoints/Checkpoint_CNet_BN_ICNR_99.pth', train_loader, net = CompressNet,device=device)
+    inference('./Checkpoints/Checkpoint_CNet_BN_ICNR_99.pth', test_loader, net = CompressNet,device=device)
 
 if __name__ == "__main__":
     main()

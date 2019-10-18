@@ -56,6 +56,8 @@ class config_test(object):
     optimizer = 'adam'
     kernel_size = 3
     diagnostic_steps = 256
+    mirror = False
+    workers = 1
 
     # WGAN
     gradient_penalty = True
@@ -66,21 +68,24 @@ class config_test(object):
 
     # Compression
     lambda_X = 1
-    channel_bottleneck = 16
+    channel_bottleneck = 8
     sample_noise = False
     use_vanilla_GAN = True
     use_feature_matching_loss = True
     upsample_dim = 256
-    multiscale = True
+    multiscale = False
     feature_matching_weight = 10
     use_conditional_GAN = False
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 class directories(object):
     data_type = 'Professional' # Professional Or Mobile
     root = './Dataset/'
     if data_type == 'Professional':
         train = 'train/'
+        test = 'test/'
         val = 'professional_valid/valid/'
     else:
         train = 'train/'
         val = 'valid/'
+        test = 'test/'

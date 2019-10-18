@@ -15,7 +15,7 @@ from torch.utils.data import sampler
 import torchvision.datasets as dset
 from model_utils import *
 import torch.nn.init as init
-
+from config import config_train, config_test
 
 # Xavier Initialization for layer weights
 def init_weights(m):
@@ -308,7 +308,7 @@ class Decoder(nn.Module):
 		# self._initialize_weights()
 		self._initialize_weights_ICNR()
 		self.ind_pred = Index_pred()
-		saved_dict = torch.load('index_pred1.pth')
+		saved_dict = torch.load('index_pred1.pth', config_test.device)
 		self.ind_pred.load_state_dict(saved_dict.state_dict())
 
 	def ICNR(self, tensor, upscale_factor=2, inizializer=nn.init.kaiming_normal):
