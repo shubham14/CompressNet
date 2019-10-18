@@ -51,7 +51,7 @@
     
     To run the inference loop for the entire pipeline
     Download the trained checkpoint from [here](https://drive.google.com/open?id=1tu4REEriS4vkWcrqSxcGvjb9P0-Cl8n6) and add it to the SAE_SPN/Checkpoints/ folder. This code evaluates the SAE-spn algorithm for all images in the SAE_SPN/Dataset/test/ folder.
-	[I'm an inline-style link](https://www.google.com)
+	
     # Testing
     cd SAE_SPN/
     python3 inference.py
