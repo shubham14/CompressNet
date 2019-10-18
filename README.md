@@ -1,9 +1,7 @@
 # CompressNet
 
 ## Project File Structure
-
-# compressnet
-        
+  
         network.py 
         ├── Decoder
         ├── Generator
@@ -22,6 +20,16 @@
         run.py
         inference.py
         
+## File Description
+    config.py – The file use to  hyperparameters for all the traning purpose.
+    inference.py – The file to compress a certain number of images
+    model.py – Assembling the overall architecture
+    data_load.py – Preprocesing the images and creating the dataloader for training 
+    model_utils.py – Helper functions to be used in the model defintion 
+    network.py – File containing the classes for the encoder-decoder architecture
+    run.py – File to train the entire model/pipeline. 
+    compress.py - Compress one paticular image file 
+
 
 # Data / Setup                 
         
@@ -50,20 +58,10 @@
     python3 run.py 
     
     To run the inference loop for the entire pipeline
-    Download the trained checkpoint from the drive link. 
-    Drive Link to checkpoint: https://drive.google.com/open?id=1tu4REEriS4vkWcrqSxcGvjb9P0-Cl8n6 
+    Download the trained checkpoint from the [drive link](https://drive.google.com/open?id=1tu4REEriS4vkWcrqSxcGvjb9P0-Cl8n6)
     Add it to the SAE_SPN/Checkpoints/ folder. This code evaluates the SAE-spn algorithm for all images in the SAE_SPN/Dataset/test/ folder.
 	
     # Testing
     cd SAE_SPN/
     python3 inference.py
     
-## File Description
-    config.py – The file use to  hyperparameters for all the traning purpose.
-    inference.py – The file to compress a certain number of images
-    model.py – Assembling the overall architecture
-    data_load.py – Preprocesing the images and creating the dataloader for training 
-    model_utils.py – Helper functions to be used in the model defintion 
-    network.py – File containing the classes for the encoder-decoder architecture
-    run.py – File to train the entire model/pipeline. 
-    compress.py - Compress one paticular image file 
