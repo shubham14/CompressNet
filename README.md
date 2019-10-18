@@ -17,9 +17,8 @@ This repository contains the code for CompressNet: Generative Compression at Ext
             ├── valid
         ├── train               # Mobile
         ├── valid               # Mobile
-
-    Training was done using the Cityscapes dataset and the CLIC Dataset. Given the data folder, the data is preprocessed and the dataloader is created for training.
-    Copy the 4 zip files onto this folder and extract. By default, you will get the following file structure. This is used in the DataLoader (refer to main.py))
+Training was done using the Cityscapes dataset and the CLIC Dataset. Given the data folder, the data is preprocessed and the dataloader is created for training.
+Copy the 4 zip files onto this folder and extract. By default, you will get the following file structure. This is used in the DataLoader (refer to main.py))
 
 ## How to run
 
