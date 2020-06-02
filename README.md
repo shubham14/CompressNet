@@ -52,6 +52,8 @@ cd SAE_SPN/
 python3 inference.py
 ```
 
+## Additional Notes
+
 ### Contact
 
 For any queries contact the authors [Suraj Kiran Raman](surajkra@umich.edu), [Aditya Ramesh](raaditya@umich.edu), [Vijayakrishna Naganoor](vijaykn@umich.edu), [Shubham Dash](shubhamd@umich.edu), [Giridharan Kumaravelu](girikum@umich.edu)
